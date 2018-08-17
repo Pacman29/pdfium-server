@@ -11,9 +11,7 @@ export default class SaveFileCommand extends BaseCommand {
 
   execute() {
     return new Promise((resolve, reject) => {
-      console.log('write file');
       fs.writeFile(this.filePath, this.File, (err) => {
-        console.log('writed file');
         if (err) {
           reject(err);
         } else {

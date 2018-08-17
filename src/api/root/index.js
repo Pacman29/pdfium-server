@@ -12,7 +12,7 @@ root.get('/pdfPage/:pdfId/:imageResolution/:pageNo', getPage);
 root.get('/pdfPage/:pdfId/:pageNo', getPage);
 
 root.use('/pdf', upload.single('pdf'));
-root.post('/pdf/:pdfId/:imageResolution/:pageNo', postGetPage);
+root.post('/pdf/:imageResolution/:pageNo', postGetPage);
 root.post('/pdf/:pdfId', postPdf);
 
 export default root;

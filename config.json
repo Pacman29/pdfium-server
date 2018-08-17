@@ -1,6 +1,6 @@
 {
   "dpi" : 200,
   "defaultImageResolution": 3,
-  "pdfStorage": "./"
-
+  "pdfStorage": "./",
+  "imageStorage": "./testImg/"
 }

@@ -1,5 +1,13 @@
+console.log('init pdfium');
+var pdf = require('./pdfium');
+pdf.cwrap('init', null, [])();
+
+global.pdfium = pdf;
+console.log('inited pdfium');
+
 require('babel-register');
 require('babel-polyfill');
+
 const config = require('./src/config');
 const app = require('./src/server');
 

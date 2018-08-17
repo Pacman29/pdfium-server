@@ -14,17 +14,35 @@ export default class RecognizerManager {
 
   async recognizePdf(model){
     try {
-      let promises = [];
-      promises.push(this.actions.savePdf({
+      let savePdfPromise = await this.actions.savePdf({
         pdfFile: model.pdfFile.buffer,
         pdfId: model.pdfId,
-      }));
-      promises.push(this.actions.recognizePdf({
+      });
+
+      let imagesPromises = await this.actions.recognizePdf({
         pdfFile: model.pdfFile.buffer,
         dpi: model.dpi
-      }));
-      let result = await Promise.all(promises);
-      console.log('recognize pdf');
+      });
+
+      imagesPromises.forEach(promise => {
+        promise.then(imgObject => {
+          console.log(imgObject.pageNo);
+          let result = this.actions.saveImage(imgObject);
+          console.log('save '+ imgObject.pageNo);
+        });
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
+  async recognizePagePdf(model){
+    try {
+      return this.actions.recognizePagePdf({
+        pdfFile: model.pdfFile.buffer,
+        dpi: model.dpi,
+        pageNo: model.pageNo
+      });
     } catch (e) {
       console.log(e.message);
     }

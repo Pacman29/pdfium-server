@@ -14,14 +14,11 @@ export default class RecognizePdfCommand extends BaseCommand {
       pdfFile: this.pdfFile
     };
     return new Promise((resolve) => {
-      console.log('load pdfium');
       let pdfium = new PdfiumDecorator(opt);
-      console.log('loaded pdfium');
       let promises = [];
       let pageCount = pdfium.pageCount;
       for (let i = 0; i < pageCount; ++i) {
-        console.log('get image ' + i);
-        promises = pdfium.getImage(i);
+        promises.push(pdfium.getImage(i));
       }
       resolve(promises);
     });

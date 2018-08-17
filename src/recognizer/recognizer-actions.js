@@ -13,6 +13,11 @@ export default class RecognizerActions {
     instance = this;
   }
 
+  saveImage(obj) {
+    let command = new SaveFileCommand(`${configFile.imageStorage}${obj.pageNo}.png`,obj.data);
+    return command.execute();
+  }
+
   savePdf(obj) {
     let command = new SaveFileCommand(`${configFile.pdfStorage}${obj.pdfId}.pdf`, obj.pdfFile);
     return command.execute();
